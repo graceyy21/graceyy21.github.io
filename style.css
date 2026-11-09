@@ -1133,15 +1133,29 @@ mark {
 
 .socials {
   display: flex;
-  gap: 1.2rem;
+  gap: 0.6rem;
 }
 
 .socials a {
-  text-underline-offset: 3px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 
 .socials a:hover {
-  color: var(--highlight);
+  background: var(--highlight);
+  color: var(--rose-deep);
+  transform: translateY(-2px);
+}
+
+.socials svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 /* ===== Scroll animation: blur + rise ===== */
