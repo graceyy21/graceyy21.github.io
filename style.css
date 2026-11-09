@@ -789,12 +789,6 @@ mark {
   background: var(--card);
 }
 
-/* Mock browser window: swap this block for a screenshot of the project */
-.project-shot span {
-  display: block;
-  height: 100%;
-}
-
 .project-shot img {
   width: 100%;
   height: 100%;
@@ -824,8 +818,6 @@ mark {
   flex-wrap: wrap;
   gap: 0 1.2rem;
 }
-
-.tone-4 span { background: linear-gradient(135deg, #fdf8f5, #e8c4c0); }
 
 .project-body {
   padding: 0.2rem 1.2rem 1.4rem;
