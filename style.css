@@ -932,12 +932,12 @@ mark {
 
 .cert-stack {
   position: relative;
-  height: 470px;
+  height: 600px;
 }
 
 .cert {
   position: absolute;
-  width: 72%;
+  width: 68%;
   border: 6px solid var(--card);
   background: var(--card);
   box-shadow: var(--shadow);
@@ -962,10 +962,16 @@ mark {
   transform: rotate(-2deg);
 }
 
+.cert-mid {
+  top: 30%;
+  right: 2%;
+  transform: rotate(1.5deg);
+}
+
 .cert-front {
-  right: 0;
+  left: 8%;
   bottom: 0;
-  transform: rotate(2deg);
+  transform: rotate(-1deg);
 }
 
 /* ===== Contact ===== */
@@ -1300,8 +1306,8 @@ mark {
     border-radius: 16px;
   }
 
-  .cert-stack { height: 340px; }
-  .cert { width: 82%; }
+  .cert-stack { height: 440px; }
+  .cert { width: 80%; }
 
   .contact {
     background: linear-gradient(170deg, var(--band), var(--rose-deep) 45%, #7a4c4f);
