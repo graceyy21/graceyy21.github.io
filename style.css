@@ -881,6 +881,101 @@ mark {
   place-items: center;
 }
 
+.image-viewer .resume-page {
+  position: relative;
+}
+
+/* Previous / next arrows, shown only when a project has several images */
+.gallery-nav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border: none;
+  border-radius: 50%;
+  background: var(--rose-deep);
+  color: var(--highlight);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.gallery-nav:hover {
+  background: var(--plum);
+  transform: scale(1.08);
+}
+
+.gallery-nav.prev { left: 12px; }
+.gallery-nav.next { right: 12px; }
+
+@media (max-width: 600px) {
+  .gallery-nav {
+    width: 34px;
+    height: 34px;
+    margin-top: -17px;
+    font-size: 1.4rem;
+    opacity: 0.85;
+  }
+  .gallery-nav.prev { left: 4px; }
+  .gallery-nav.next { right: 4px; }
+}
+
+.is-gallery .gallery-nav {
+  display: block;
+}
+
+.gallery-count {
+  padding: 0.5rem;
+  background: var(--bg-alt);
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.gallery-count:empty {
+  display: none;
+}
+
+.project-link .count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--highlight);
+  color: var(--rose-deep);
+  font-size: 0.72rem;
+}
+
+/* The project picture itself opens the gallery */
+.project-shot[data-gallery] {
+  position: relative;
+  cursor: zoom-in;
+}
+
+.project-shot[data-gallery]::after {
+  content: "View images";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(74, 63, 68, 0.45);
+  color: #fff;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.project-shot[data-gallery]:hover::after,
+.project-shot[data-gallery]:focus-visible::after {
+  opacity: 1;
+}
+
 .image-viewer .resume-page img {
   width: auto;
   max-width: 100%;

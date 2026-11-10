@@ -169,16 +169,52 @@ const imageViewer = document.getElementById("image-viewer");
 const imageViewerImg = document.getElementById("image-viewer-img");
 const imageViewerTitle = document.getElementById("image-viewer-title");
 
-document.querySelectorAll("[data-view]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const project = button.closest(".project-card").querySelector("h4").textContent;
-    const label = button.textContent.trim();
-    imageViewerTitle.textContent = `${project} · ${label}`;
-    imageViewerImg.src = button.dataset.view;
-    imageViewerImg.alt = `${project}: ${label}`;
-    imageViewer.showModal();
-    document.body.style.overflow = "hidden";
+const galleryPrev = document.getElementById("gallery-prev");
+const galleryNext = document.getElementById("gallery-next");
+const galleryCount = document.getElementById("gallery-count");
+let gallery = { project: "", images: [], index: 0 };
+
+function showGalleryImage(index) {
+  const { project, images } = gallery;
+  gallery.index = (index + images.length) % images.length;
+  const { src, label } = images[gallery.index];
+  imageViewerTitle.textContent = `${project} · ${label}`;
+  imageViewerImg.src = src;
+  imageViewerImg.alt = `${project}: ${label}`;
+  galleryCount.textContent = images.length > 1 ? `${gallery.index + 1} / ${images.length}` : "";
+}
+
+function openGallery(card) {
+  gallery = {
+    project: card.querySelector("h4").textContent,
+    images: JSON.parse(card.dataset.images),
+    index: 0,
+  };
+  imageViewer.classList.toggle("is-gallery", gallery.images.length > 1);
+  showGalleryImage(0);
+  imageViewer.showModal();
+  document.body.style.overflow = "hidden";
+}
+
+// The "View Images" button and the card's picture both open the gallery
+document.querySelectorAll("[data-gallery]").forEach((trigger) => {
+  const card = trigger.closest(".project-card");
+  trigger.addEventListener("click", () => openGallery(card));
+  trigger.addEventListener("keydown", (e) => {
+    if (trigger.tagName !== "BUTTON" && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      openGallery(card);
+    }
   });
+});
+
+galleryPrev.addEventListener("click", () => showGalleryImage(gallery.index - 1));
+galleryNext.addEventListener("click", () => showGalleryImage(gallery.index + 1));
+
+imageViewer.addEventListener("keydown", (e) => {
+  if (gallery.images.length < 2) return;
+  if (e.key === "ArrowLeft") showGalleryImage(gallery.index - 1);
+  if (e.key === "ArrowRight") showGalleryImage(gallery.index + 1);
 });
 
 document.getElementById("image-viewer-close").addEventListener("click", () => imageViewer.close());
