@@ -800,27 +800,91 @@ mark {
   object-position: top;
 }
 
-.project-link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: var(--highlight);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-underline-offset: 4px;
+/* Cards stretch to equal height so every button row lines up at the bottom */
+.project-card {
+  display: flex;
+  flex-direction: column;
 }
 
-.project-link:hover {
-  color: #fff;
+.project-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.2rem 1.2rem 1.3rem;
 }
 
 .project-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1.2rem;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
 }
 
-.project-body {
-  padding: 0.2rem 1.2rem 1.4rem;
+.chips + .project-links {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: auto;
+}
+
+.chips {
+  margin-bottom: 1.1rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--highlight);
+  border-radius: 50px;
+  background: var(--highlight);
+  color: var(--rose-deep);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+
+/* Screenshot buttons: outlined, so the live-site button stands out */
+.project-link.is-view {
+  background: transparent;
+  color: var(--highlight);
+}
+
+.project-link:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--rose-deep);
+  transform: translateY(-2px);
+}
+
+.project-link svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Screenshot viewer fits the whole image on screen */
+.image-viewer {
+  width: auto;
+  max-width: min(1000px, calc(100% - 32px));
+}
+
+.image-viewer .resume-page {
+  display: grid;
+  place-items: center;
+}
+
+.image-viewer .resume-page img {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 140px);
 }
 
 .project-type {

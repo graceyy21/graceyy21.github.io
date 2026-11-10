@@ -164,5 +164,32 @@ resumeViewer.addEventListener("close", () => {
 // Discourage saving: no right-click menu or dragging on the resume
 resumeViewer.addEventListener("contextmenu", (e) => e.preventDefault());
 
+// ===== Project screenshot viewer =====
+const imageViewer = document.getElementById("image-viewer");
+const imageViewerImg = document.getElementById("image-viewer-img");
+const imageViewerTitle = document.getElementById("image-viewer-title");
+
+document.querySelectorAll("[data-view]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const project = button.closest(".project-card").querySelector("h4").textContent;
+    const label = button.textContent.trim();
+    imageViewerTitle.textContent = `${project} · ${label}`;
+    imageViewerImg.src = button.dataset.view;
+    imageViewerImg.alt = `${project}: ${label}`;
+    imageViewer.showModal();
+    document.body.style.overflow = "hidden";
+  });
+});
+
+document.getElementById("image-viewer-close").addEventListener("click", () => imageViewer.close());
+
+imageViewer.addEventListener("click", (e) => {
+  if (e.target === imageViewer) imageViewer.close();
+});
+
+imageViewer.addEventListener("close", () => {
+  document.body.style.overflow = "";
+});
+
 // ===== Footer year =====
 document.getElementById("year").textContent = new Date().getFullYear();
