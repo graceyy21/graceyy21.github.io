@@ -7,11 +7,11 @@
   <meta name="description" content="Portfolio of Grace Ann Demate, front-end developer and designer.">
   <script>
     document.documentElement.classList.add("js");
-    // Apply the saved theme (or the device's setting) before the page draws, so it never flashes
+    // Apply the saved theme before the page draws, so it never flashes. Light is the default.
     (function () {
       var theme = null;
       try { theme = localStorage.getItem("theme"); } catch (e) {}
-      if (!theme) theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (theme !== "dark") theme = "light";
       document.documentElement.dataset.theme = theme;
     })();
   </script>
